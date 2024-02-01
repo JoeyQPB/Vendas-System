@@ -1,6 +1,5 @@
 package br.com.joey.domain;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
@@ -20,7 +19,7 @@ public class Sell implements Persistente {
 	private String code;
 	private Cliente cliente;
 	private Set<ProdutoQuantidade> produtos;
-	private BigDecimal total;
+	private Double total;
 	private Instant sellDate;
 	private Status status;
 	
@@ -68,7 +67,7 @@ public class Sell implements Persistente {
 		return produtos;
 	}
 
-	public BigDecimal getTotal() {
+	public Double getTotal() {
 		return total;
 	}
 
@@ -139,7 +138,7 @@ public class Sell implements Persistente {
 	public void removerTodosProdutos() {
 		validarStatus();
 		produtos.clear();
-		total = BigDecimal.ZERO;
+		total = 0.0;
 	}
 	
 	public Integer getQuantidadeTotalProdutos() {
@@ -150,9 +149,9 @@ public class Sell implements Persistente {
 	
 	private void recalcularValorTotalVenda() {
 		validarStatus();
-		BigDecimal valorTotal = BigDecimal.ZERO;
+		double valorTotal = 0.0;
 		for (ProdutoQuantidade prod : this.produtos) {
-			valorTotal = valorTotal.add(prod.getValorTotal());
+			valorTotal = valorTotal + prod.getValorTotal();
 		}
 		this.total = valorTotal;
 	}

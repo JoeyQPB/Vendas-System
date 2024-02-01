@@ -7,9 +7,9 @@ import br.com.joey.dao.Persistente;
 
 public class Cliente implements Persistente{
 
+	private Long id;
 	@UniqueValue(value="getCpf")
 	private Long cpf;
-	
 	private String name;
 	private Long cel;
 	private String end;
@@ -20,6 +20,17 @@ public class Cliente implements Persistente{
 	public Cliente() {}
 
 	public Cliente(String name, Long cel, Long cpf, String end, Integer numero, String cidade, String estado) {
+		this.name = name;
+		this.cel = cel;
+		this.cpf = cpf;
+		this.end = end;
+		this.numero = numero;
+		this.cidade = cidade;
+		this.estado = estado;
+	}
+	
+	public Cliente(Long id, String name, Long cel, Long cpf, String end, Integer numero, String cidade, String estado) {
+		this.id = id;
 		this.name = name;
 		this.cel = cel;
 		this.cpf = cpf;
@@ -106,6 +117,10 @@ public class Cliente implements Persistente{
 	public String toString() {
 		return "Cliente [name=" + name + ", cel=" + cel + ", cpf=" + cpf + ", end=" + end + ", numero=" + numero
 				+ ", cidade=" + cidade + ", estado=" + estado + "]";
+	}
+
+	public Long getId() {
+		return id;
 	}
 	
 }

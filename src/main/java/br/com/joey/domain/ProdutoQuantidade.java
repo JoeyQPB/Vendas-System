@@ -1,16 +1,14 @@
 package br.com.joey.domain;
 
-import java.math.BigDecimal;
-
 public class ProdutoQuantidade {
 	
 	private Product produto;
 	private Integer quantidade;
-	private BigDecimal valorTotal;
+	private Double valorTotal;
 	
 	public ProdutoQuantidade() {
 		this.quantidade = 0;
-		this.valorTotal = BigDecimal.ZERO;
+		this.valorTotal = 0.0;
 	}
 
 	public Product getProduto() {
@@ -29,25 +27,25 @@ public class ProdutoQuantidade {
 		this.quantidade = quantidade;
 	}
 
-	public BigDecimal getValorTotal() {
+	public Double getValorTotal() {
 		return valorTotal;
 	}
 
-	public void setValorTotal(BigDecimal valorTotal) {
+	public void setValorTotal(Double valorTotal) {
 		this.valorTotal = valorTotal;
 	}
 	
 	public void adicionar(Integer quantidade) {
 		this.quantidade += quantidade;
-		BigDecimal novoValor = this.produto.getPrice().multiply(BigDecimal.valueOf(quantidade));
-		BigDecimal novoTotal = this.valorTotal.add(novoValor);
+		Double novoValor = this.produto.getPrice()*quantidade;
+		Double novoTotal = this.valorTotal + novoValor;
 		this.valorTotal = novoTotal;
 	}
 	
 	public void remover(Integer quantidade) {
 		this.quantidade -= quantidade;
-		BigDecimal novoValor = this.produto.getPrice().multiply(BigDecimal.valueOf(quantidade));
-		this.valorTotal = this.valorTotal.subtract(novoValor);
+		Double novoValor = this.produto.getPrice() * quantidade;
+		this.valorTotal = this.valorTotal - novoValor;
 	}
 
 	@Override

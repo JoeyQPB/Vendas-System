@@ -2,12 +2,11 @@ package br.com.joey;
 
 import static org.junit.Assert.assertTrue;
 
-import java.math.BigDecimal;
 import java.util.Collection;
 
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import Exceptions.UniqueValueNotFoundException;
 import br.com.joey.dao.IProductDAO;
@@ -25,7 +24,7 @@ class ProductDAOTest {
 	
 	@BeforeEach
 	void inti() {
-		product = new Product("A1", "Nome do produto", "descrição", BigDecimal.TEN);
+		product = new Product("A1", "Nome do produto", "descrição", 10.0);
 	}
 	
 	@Test

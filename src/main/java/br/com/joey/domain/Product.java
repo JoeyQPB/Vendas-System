@@ -1,6 +1,5 @@
 package br.com.joey.domain;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 
 import br.com.joey.annotations.UniqueValue;
@@ -8,14 +7,22 @@ import br.com.joey.dao.Persistente;
 
 public class Product implements Persistente {
 
+	private Long id;
 	@UniqueValue("getCode")
 	private String code;
 	private String name;
 	private String descricao;
-	private BigDecimal price;
+	private Double price;
 	
-	public Product(String code, String name, String descricao, BigDecimal price) {
-		super();
+	public Product(String code, String name, String descricao, Double price) {
+		this.code = code;
+		this.name = name;
+		this.descricao = descricao;
+		this.price = price;
+	}	
+	
+	public Product(Long id, String code, String name, String descricao, Double price) {
+		this.id = id;
 		this.code = code;
 		this.name = name;
 		this.descricao = descricao;
@@ -49,11 +56,11 @@ public class Product implements Persistente {
 		this.descricao = descricao;
 	}
 
-	public BigDecimal getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
@@ -77,5 +84,9 @@ public class Product implements Persistente {
 	@Override
 	public String toString() {
 		return "Product [code=" + code + ", name=" + name + ", descricao=" + descricao + ", price=" + price + "]";
+	}
+
+	public Long getId() {
+		return id;
 	}
 }

@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -38,7 +37,7 @@ class SellDAOTest {
 		ProductDao = new ProductDAO();
 	}
 
-	private Product cadastrarProduct(String code, BigDecimal price) throws UniqueValueNotFoundException {
+	private Product cadastrarProduct(String code, Double price) throws UniqueValueNotFoundException {
 		Product Product = new Product(code, "Product 1", "descrição produto", price);
 		ProductDao.insert(Product);
 		return Product;
@@ -59,7 +58,7 @@ class SellDAOTest {
 	@BeforeEach
 	public void init() throws UniqueValueNotFoundException {
 		this.cliente = cadastrarCliente();
-		this.product = cadastrarProduct("A1", BigDecimal.TEN);
+		this.product = cadastrarProduct("A1", 10.0);
 	}
 
 	@Test
@@ -76,7 +75,7 @@ class SellDAOTest {
 		Sell venda = criarVenda("A2");
 		Boolean retorno = vendaDao.insert(venda);
 		assertTrue(retorno);
-		assertTrue(venda.getTotal().equals(BigDecimal.valueOf(20)));
+		assertTrue(venda.getTotal().equals(20.0));
 		assertTrue(venda.getStatus().equals(Status.INICIADA));
 	} 
 	
@@ -112,7 +111,7 @@ class SellDAOTest {
 		vendaConsultada.adicionarProduto(this.product, 1);
 		
 		assertTrue(venda.getQuantidadeTotalProdutos() == 3);
-		assertTrue(venda.getTotal().equals(BigDecimal.valueOf(30)));
+		assertTrue(venda.getTotal().equals(30.0));
 		assertTrue(venda.getStatus().equals(Status.INICIADA));
 	} 
 	
@@ -125,7 +124,7 @@ class SellDAOTest {
 		assertNotNull(venda);
 		assertEquals(codigoVenda, venda.getCode());
 		
-		Product prod = cadastrarProduct(codigoVenda, BigDecimal.valueOf(50));
+		Product prod = cadastrarProduct(codigoVenda, 50.0);
 		assertNotNull(prod);
 		assertEquals(codigoVenda, prod.getCode());
 		
@@ -133,7 +132,7 @@ class SellDAOTest {
 		vendaConsultada.adicionarProduto(prod, 1);
 		
 		assertTrue(venda.getQuantidadeTotalProdutos() == 3);
-		assertTrue(venda.getTotal().equals(BigDecimal.valueOf(70)));
+		assertTrue(venda.getTotal().equals(70.0));
 		assertTrue(venda.getStatus().equals(Status.INICIADA));
 	} 
 	
@@ -158,19 +157,19 @@ class SellDAOTest {
 		assertNotNull(venda);
 		assertEquals(codigoVenda, venda.getCode());
 		
-		Product prod = cadastrarProduct(codigoVenda, BigDecimal.valueOf(50));
+		Product prod = cadastrarProduct(codigoVenda, 50.0);
 		assertNotNull(prod);
 		assertEquals(codigoVenda, prod.getCode());
 		
 		Sell vendaConsultada = vendaDao.get(codigoVenda);
 		vendaConsultada.adicionarProduto(prod, 1);
 		assertTrue(venda.getQuantidadeTotalProdutos() == 3);
-		assertTrue(venda.getTotal().equals(BigDecimal.valueOf(70)));
+		assertTrue(venda.getTotal().equals(70.0));
 		
 		
 		vendaConsultada.removerProduto(prod, 1);
 		assertTrue(venda.getQuantidadeTotalProdutos() == 2);
-		assertTrue(venda.getTotal().equals(BigDecimal.valueOf(20)));
+		assertTrue(venda.getTotal().equals(20.0));
 		assertTrue(venda.getStatus().equals(Status.INICIADA));
 	} 
 	
@@ -183,19 +182,19 @@ class SellDAOTest {
 		assertNotNull(venda);
 		assertEquals(codigoVenda, venda.getCode());
 		
-		Product prod = cadastrarProduct(codigoVenda, BigDecimal.valueOf(50));
+		Product prod = cadastrarProduct(codigoVenda, 50.0);
 		assertNotNull(prod);
 		assertEquals(codigoVenda, prod.getCode());
 		
 		Sell vendaConsultada = vendaDao.get(codigoVenda);
 		vendaConsultada.adicionarProduto(prod, 1);
 		assertTrue(venda.getQuantidadeTotalProdutos() == 3);
-		assertTrue(venda.getTotal().equals(BigDecimal.valueOf(70)));
+		assertTrue(venda.getTotal().equals(70.0));
 		
 		
 		vendaConsultada.removerProduto(prod, 1);
 		assertTrue(venda.getQuantidadeTotalProdutos() == 2);
-		assertTrue(venda.getTotal().equals(BigDecimal.valueOf(20)));
+		assertTrue(venda.getTotal().equals(20.0));
 		assertTrue(venda.getStatus().equals(Status.INICIADA));
 	} 
 	
@@ -208,19 +207,19 @@ class SellDAOTest {
 		assertNotNull(venda);
 		assertEquals(codigoVenda, venda.getCode());
 		
-		Product prod = cadastrarProduct(codigoVenda, BigDecimal.valueOf(50));
+		Product prod = cadastrarProduct(codigoVenda, 50.0);
 		assertNotNull(prod);
 		assertEquals(codigoVenda, prod.getCode());
 		
 		Sell vendaConsultada = vendaDao.get(codigoVenda);
 		vendaConsultada.adicionarProduto(prod, 1);
 		assertTrue(venda.getQuantidadeTotalProdutos() == 3);
-		assertTrue(venda.getTotal().equals(BigDecimal.valueOf(70)));
+		assertTrue(venda.getTotal().equals(70.0));
 		
 		
 		vendaConsultada.removerTodosProdutos();
 		assertTrue(venda.getQuantidadeTotalProdutos() == 0);
-		assertTrue(venda.getTotal().equals(BigDecimal.valueOf(0)));
+		assertTrue(venda.getTotal().equals(0.0));
 		assertTrue(venda.getStatus().equals(Status.INICIADA));
 	} 
 }

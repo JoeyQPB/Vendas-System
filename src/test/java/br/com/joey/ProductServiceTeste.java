@@ -2,8 +2,6 @@ package br.com.joey;
 
 import static org.junit.Assert.assertTrue;
 
-import java.math.BigDecimal;
-
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +25,7 @@ class ProductServiceTeste {
 	
 	@BeforeEach
 	void inti() {
-		product = new Product("A1", "Nome do produto", "descrição", BigDecimal.TEN);
+		product = new Product("A1", "Nome do produto", "descrição", 10.0);
 	}
 	
 	@Test
