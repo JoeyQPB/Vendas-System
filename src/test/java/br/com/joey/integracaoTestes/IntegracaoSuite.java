@@ -5,6 +5,4 @@ import org.junit.platform.suite.api.Suite;
 
 @Suite
 @SelectClasses({ ClienteIntegracaoTestes.class, ProductIntegracaoTestes.class })
-public class IntegracaoSuite {
-
-}
+public class IntegracaoSuite {}

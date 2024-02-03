@@ -16,14 +16,14 @@ public class ProductDaoMock implements IProductDAO {
 	}
 
 	@Override
-	public Product get(String value) {
+	public Product select(String value) {
 		Product produto = new Product();
 		produto.setCode(value);
 		return produto;
 	}
 
 	@Override
-	public Collection<Product> getAll() {
+	public Collection<Product> selectAll() {
 		list = Arrays.asList(new Product(), new Product());
 		return list;
 	}

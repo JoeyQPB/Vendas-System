@@ -13,7 +13,7 @@ public class clienteService extends GenericService<Cliente, Long> implements ICl
 
 	@Override
 	public Cliente getByCpf(Long cpf) {
-		return this.dao.get(cpf);
+		return this.dao.select(cpf);
 	}
 
 }

@@ -32,11 +32,11 @@ public abstract class GenericService<T extends Persistente, E extends Serializab
 
 	@Override
 	public T get(E valor) {
-		return this.dao.get(valor);
+		return this.dao.select(valor);
 	}
 
 	@Override
 	public Collection<T> getAll() {
-		return this.dao.getAll();
+		return this.dao.selectAll();
 	}
 }

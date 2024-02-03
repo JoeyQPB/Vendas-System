@@ -16,14 +16,14 @@ public class ClientDaoMock implements IClientDAO {
 	}
 
 	@Override
-	public Cliente get(Long value) {
+	public Cliente select(Long value) {
 		Cliente cliente = new Cliente();
 		cliente.setCpf(value);
 		return cliente;
 	}
 
 	@Override
-	public Collection<Cliente> getAll() {
+	public Collection<Cliente> selectAll() {
 		list = Arrays.asList(new Cliente(), new Cliente());
 		return list;
 	}

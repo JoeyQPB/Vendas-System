@@ -2,16 +2,28 @@ package br.com.joey.domain;
 
 import java.util.Objects;
 
+import br.com.joey.annotations.Column;
+import br.com.joey.annotations.Table;
 import br.com.joey.annotations.UniqueValue;
 import br.com.joey.dao.Persistente;
 
+@Table("tb_produto")
 public class Product implements Persistente {
 
+	@Column(dbName= "id", setJavaName = "setId", getJavaName = "getId")
 	private Long id;
+	
 	@UniqueValue("getCode")
+	@Column(dbName= "code", setJavaName = "setCode", getJavaName = "getCode")
 	private String code;
+	
+	@Column(dbName= "nome", setJavaName = "setName", getJavaName = "getName")
 	private String name;
+	
+	@Column(dbName= "descricao", setJavaName = "setDescricao", getJavaName = "getDescricao")
 	private String descricao;
+	
+	@Column(dbName= "preco", setJavaName = "setPrice", getJavaName = "getPrice")
 	private Double price;
 	
 	public Product(String code, String name, String descricao, Double price) {
@@ -19,7 +31,7 @@ public class Product implements Persistente {
 		this.name = name;
 		this.descricao = descricao;
 		this.price = price;
-	}	
+	}	 
 	
 	public Product(Long id, String code, String name, String descricao, Double price) {
 		this.id = id;
@@ -30,6 +42,14 @@ public class Product implements Persistente {
 	}
 
 	public Product() {
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getCode() {
@@ -84,9 +104,5 @@ public class Product implements Persistente {
 	@Override
 	public String toString() {
 		return "Product [code=" + code + ", name=" + name + ", descricao=" + descricao + ", price=" + price + "]";
-	}
-
-	public Long getId() {
-		return id;
 	}
 }

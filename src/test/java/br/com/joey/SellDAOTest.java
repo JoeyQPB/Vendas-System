@@ -66,7 +66,7 @@ class SellDAOTest {
 		Sell sell = criarVenda("A1");
 		Boolean retorno = vendaDao.insert(sell);
 		assertTrue(retorno);
-		Sell vendaConsultada = vendaDao.get(sell.getCode());
+		Sell vendaConsultada = vendaDao.select(sell.getCode());
 		assertNotNull(vendaConsultada);
 		assertEquals(sell.getCode(), vendaConsultada.getCode());
 	}
@@ -92,7 +92,7 @@ class SellDAOTest {
 		venda.setStatus(Status.CANCELADA);
 		vendaDao.update(venda);
 		
-		Sell vendaConsultada = vendaDao.get(codigoVenda);
+		Sell vendaConsultada = vendaDao.select(codigoVenda);
 		assertEquals(codigoVenda, vendaConsultada.getCode());
 		assertEquals(Status.CANCELADA, vendaConsultada.getStatus());
 	}
@@ -107,7 +107,7 @@ class SellDAOTest {
 		assertNotNull(venda);
 		assertEquals(codigoVenda, venda.getCode());
 		
-		Sell vendaConsultada = vendaDao.get(codigoVenda);
+		Sell vendaConsultada = vendaDao.select(codigoVenda);
 		vendaConsultada.adicionarProduto(this.product, 1);
 		
 		assertTrue(venda.getQuantidadeTotalProdutos() == 3);
@@ -128,7 +128,7 @@ class SellDAOTest {
 		assertNotNull(prod);
 		assertEquals(codigoVenda, prod.getCode());
 		
-		Sell vendaConsultada = vendaDao.get(codigoVenda);
+		Sell vendaConsultada = vendaDao.select(codigoVenda);
 		vendaConsultada.adicionarProduto(prod, 1);
 		
 		assertTrue(venda.getQuantidadeTotalProdutos() == 3);
@@ -161,7 +161,7 @@ class SellDAOTest {
 		assertNotNull(prod);
 		assertEquals(codigoVenda, prod.getCode());
 		
-		Sell vendaConsultada = vendaDao.get(codigoVenda);
+		Sell vendaConsultada = vendaDao.select(codigoVenda);
 		vendaConsultada.adicionarProduto(prod, 1);
 		assertTrue(venda.getQuantidadeTotalProdutos() == 3);
 		assertTrue(venda.getTotal().equals(70.0));
@@ -186,7 +186,7 @@ class SellDAOTest {
 		assertNotNull(prod);
 		assertEquals(codigoVenda, prod.getCode());
 		
-		Sell vendaConsultada = vendaDao.get(codigoVenda);
+		Sell vendaConsultada = vendaDao.select(codigoVenda);
 		vendaConsultada.adicionarProduto(prod, 1);
 		assertTrue(venda.getQuantidadeTotalProdutos() == 3);
 		assertTrue(venda.getTotal().equals(70.0));
@@ -211,7 +211,7 @@ class SellDAOTest {
 		assertNotNull(prod);
 		assertEquals(codigoVenda, prod.getCode());
 		
-		Sell vendaConsultada = vendaDao.get(codigoVenda);
+		Sell vendaConsultada = vendaDao.select(codigoVenda);
 		vendaConsultada.adicionarProduto(prod, 1);
 		assertTrue(venda.getQuantidadeTotalProdutos() == 3);
 		assertTrue(venda.getTotal().equals(70.0));

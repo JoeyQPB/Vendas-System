@@ -35,14 +35,14 @@ class ProductDAOTest {
 	@Test
 	void get() throws UniqueValueNotFoundException {
 		dao.insert(product);
-		Product prodConsultod = dao.get(product.getCode());
+		Product prodConsultod = dao.select(product.getCode());
 		Assert.assertNotNull(prodConsultod);
 		Assert.assertEquals(product, prodConsultod);
 	}
 	
 	@Test
 	void getAll() {
-		Collection<Product> list =  dao.getAll();
+		Collection<Product> list =  dao.selectAll();
 		Assert.assertNotNull(list);
 	}
 	

@@ -33,14 +33,14 @@ class ClienteDAOTeste {
 	@Test
 	void get() throws UniqueValueNotFoundException {
 		clientDAO.insert(cliente);
-		Cliente clientConsultado = clientDAO.get(cliente.getCpf());
+		Cliente clientConsultado = clientDAO.select(cliente.getCpf());
 		Assert.assertNotNull(clientConsultado);
 		Assert.assertEquals(cliente, clientConsultado);
 	}
 	
 	@Test
 	void getAll() {
-		Collection<Cliente> list =  clientDAO.getAll();
+		Collection<Cliente> list =  clientDAO.selectAll();
 		Assert.assertNotNull(list);
 	}
 	

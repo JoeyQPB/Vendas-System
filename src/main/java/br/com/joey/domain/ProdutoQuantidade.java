@@ -1,14 +1,34 @@
 package br.com.joey.domain;
 
+import br.com.joey.annotations.Column;
+import br.com.joey.annotations.Table;
+
+@Table("tb_produtoQuantidade")
 public class ProdutoQuantidade {
 	
+	@Column(dbName= "id", setJavaName = "setId", getJavaName = "getId")
+	private Long id;
+	
+	@Column(dbName= "id_produto_fk", setJavaName = "setProdutofk", getJavaName = "getProdutofk")
 	private Product produto;
+	
+	@Column(dbName= "quantidade", setJavaName = "setQuantidade", getJavaName = "getQuantidade")
 	private Integer quantidade;
+	
+	@Column(dbName= "valorTotal", setJavaName = "setValorTotal", getJavaName = "getValorTotal")
 	private Double valorTotal;
 	
 	public ProdutoQuantidade() {
 		this.quantidade = 0;
 		this.valorTotal = 0.0;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Product getProduto() {

@@ -6,21 +6,38 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import br.com.joey.annotations.Column;
+import br.com.joey.annotations.Table;
 import br.com.joey.annotations.UniqueValue;
 import br.com.joey.dao.Persistente;
 
+@Table("tb_venda")
 public class Sell implements Persistente {
 	
 	public enum Status {
 		INICIADA, CONCLUIDA, CANCELADA;
 	}
-
+	
+	@Column(dbName = "id", setJavaName = "setId", getJavaName = "getId")
+	private Long id;
+	
 	@UniqueValue("getCode")
+	@Column(dbName = "codigo", setJavaName = "setCode", getJavaName = "getCode")
 	private String code;
+	
+	@Column(dbName = "id_cliente_fk", setJavaName = "setClientefk", getJavaName = "getClientefk")
 	private Cliente cliente;
+	
+	@Column(dbName = "id_produtos_fk", setJavaName = "setProdutosfk", getJavaName = "getProdutosfk")
 	private Set<ProdutoQuantidade> produtos;
+	
+	@Column(dbName = "total", setJavaName = "setTotal", getJavaName = "getTotal")
 	private Double total;
+	
+	@Column(dbName = "sellDate", setJavaName = "setsellDate", getJavaName = "getsellDate")
 	private Instant sellDate;
+	
+	@Column(dbName = "status", setJavaName = "setStatus", getJavaName = "getStatus")
 	private Status status;
 	
 	public Sell(String code, Cliente cliente, Instant sellDate, Status status) {
@@ -29,6 +46,14 @@ public class Sell implements Persistente {
 		this.cliente = cliente;
 		this.sellDate = sellDate;
 		this.status = status;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getCode() {
@@ -155,8 +180,4 @@ public class Sell implements Persistente {
 		}
 		this.total = valorTotal;
 	}
-	
-	
-	
-	
 }

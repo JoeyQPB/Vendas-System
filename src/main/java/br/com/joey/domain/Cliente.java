@@ -2,27 +2,45 @@ package br.com.joey.domain;
 
 import java.util.Objects;
 
+import br.com.joey.annotations.Column;
+import br.com.joey.annotations.Table;
 import br.com.joey.annotations.UniqueValue;
 import br.com.joey.dao.Persistente;
 
+@Table("tb_cliente")
 public class Cliente implements Persistente{
 
+	@Column(dbName= "id", setJavaName = "setId", getJavaName = "getId")
 	private Long id;
+	
 	@UniqueValue(value="getCpf")
+	@Column(dbName= "cpf", setJavaName = "setCpf", getJavaName = "getCpf")
 	private Long cpf;
+	
+	@Column(dbName= "nome", setJavaName = "setName", getJavaName = "getName")
 	private String name;
+	
+	@Column(dbName= "tel", setJavaName = "setCel", getJavaName = "getCel")
 	private Long cel;
+	
+	@Column(dbName= "endereco", setJavaName = "setEnd", getJavaName = "getEnd")
 	private String end;
+	
+	@Column(dbName= "numero", setJavaName = "setNumero", getJavaName = "getNumero")
 	private Integer numero;
+	
+	@Column(dbName= "cidade", setJavaName = "setCidade", getJavaName = "getCidade")
 	private String cidade;
+	
+	@Column(dbName= "estado", setJavaName = "setEstado", getJavaName = "getEstado")
 	private String estado;
 	
-	public Cliente() {}
+	public Cliente() {} 
 
 	public Cliente(String name, Long cel, Long cpf, String end, Integer numero, String cidade, String estado) {
 		this.name = name;
 		this.cel = cel;
-		this.cpf = cpf;
+		this.cpf = cpf; 
 		this.end = end;
 		this.numero = numero;
 		this.cidade = cidade;
@@ -38,6 +56,14 @@ public class Cliente implements Persistente{
 		this.numero = numero;
 		this.cidade = cidade;
 		this.estado = estado;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id =  id;
 	}
 
 	public String getName() {
@@ -118,9 +144,4 @@ public class Cliente implements Persistente{
 		return "Cliente [name=" + name + ", cel=" + cel + ", cpf=" + cpf + ", end=" + end + ", numero=" + numero
 				+ ", cidade=" + cidade + ", estado=" + estado + "]";
 	}
-
-	public Long getId() {
-		return id;
-	}
-	
 }

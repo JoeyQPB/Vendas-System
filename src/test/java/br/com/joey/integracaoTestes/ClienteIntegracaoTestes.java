@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Collection;
 
+import org.junit.After;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +24,23 @@ class ClienteIntegracaoTestes {
 	@BeforeEach
 	void init() {
 		dao = new clientDAO();
+		Collection<Cliente> list =  selectAllClientTest();
+		if (!list.isEmpty()) {
+			for (Cliente c : list) {
+				assertTrue(deleteClientTest(c.getCpf()));
+			}
+		}
 		client = new Cliente("Jhon Doe", 5577988256741L, 11112312367L, "rua", 10, "city", "Estado");
+	}
+	
+	@After
+	void finish() {
+		Collection<Cliente> list =  selectAllClientTest();
+		if (!list.isEmpty()) {
+			for (Cliente c : list) {
+				assertTrue(deleteClientTest(c.getCpf()));
+			}
+		}
 	}
 
 	@Test
@@ -36,8 +53,6 @@ class ClienteIntegracaoTestes {
 		assertEquals(client, clientDb);
 		assertEquals(client.getCpf(), clientDb.getCpf());
 		assertEquals(client.toString(), clientDb.toString());
-		
-		assertTrue(deleteClientTest(client.getCpf()));
 	}
 	
 	@Test
@@ -50,8 +65,6 @@ class ClienteIntegracaoTestes {
 		assertEquals(client, clientDb);
 		assertEquals(client.getCpf(), clientDb.getCpf());
 		assertEquals(client.toString(), clientDb.toString());
-		
-		assertTrue(deleteClientTest(client.getCpf()));
 	}
 	
 	@Test
@@ -65,13 +78,6 @@ class ClienteIntegracaoTestes {
 		assertEquals(list.size(), 2);
 		assertTrue(list.contains(client));
 		assertTrue(list.contains(client2));
-		
-		int countDel = 0;
-		for (Cliente c : list) {
-			assertTrue(deleteClientTest(c.getCpf()));
-			countDel++;
-		}
-		assertEquals(countDel, 2);
 	}
 	
 	@Test
@@ -107,8 +113,6 @@ class ClienteIntegracaoTestes {
 		assertEquals(clientDbUpdated.getCel(), clientDb.getCel());
 		assertEquals(clientDbUpdated.getCidade(), clientDb.getCidade());
 		assertEquals(clientDbUpdated.getEnd(), clientDb.getEnd());
-
-		assertTrue(deleteClientTest(cpfUnalterable));
 	}
 	
 	@Test
@@ -136,11 +140,11 @@ class ClienteIntegracaoTestes {
 	}
 	
 	private Cliente selectClientTest(Long value) {
-		return dao.get(value);
+		return dao.select(value);
 	}
 		
 	private Collection<Cliente> selectAllClientTest() {
-			return dao.getAll();
+			return dao.selectAll();
 	}
 	
 	private Boolean updateClientTest(Cliente c) {

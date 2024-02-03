@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Collection;
 
+import org.junit.After;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +24,23 @@ class ProductIntegracaoTestes {
 	@BeforeEach
 	void init() {
 		dao = new ProductDAO();
+		Collection<Product> list =  selectAllProduct();
+		if (!list.isEmpty()) {
+			for (Product p : list) {
+				assertTrue(deleteProduct(p.getCode()));
+			}
+		}
 		produto = new Product("AZN87", "Phone", "make calls", 1000.0);
+	}
+	
+	@After
+	void finish() {
+		Collection<Product> list =  selectAllProduct();
+		if (!list.isEmpty()) {
+			for (Product p : list) {
+				assertTrue(deleteProduct(p.getCode()));
+			}
+		}
 	}
 	
 	@Test
@@ -132,11 +149,11 @@ class ProductIntegracaoTestes {
 	}
 	
 	private Product selectProduct(String code) {
-		return dao.get(code);
+		return dao.select(code);
 	}
 	
 	private Collection<Product> selectAllProduct() {
-		return dao.getAll();
+		return dao.selectAll();
 	}
 	
 	private boolean updateTest(Product p) {
