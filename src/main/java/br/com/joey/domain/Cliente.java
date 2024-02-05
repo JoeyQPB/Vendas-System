@@ -1,5 +1,6 @@
 package br.com.joey.domain;
 
+import java.util.Date;
 import java.util.Objects;
 
 import br.com.joey.annotations.Column;
@@ -8,7 +9,7 @@ import br.com.joey.annotations.UniqueValue;
 import br.com.joey.dao.Persistente;
 
 @Table("tb_cliente")
-public class Cliente implements Persistente{
+public class Cliente implements Persistente {
 
 	@Column(dbName= "id", setJavaName = "setId", getJavaName = "getId")
 	private Long id;
@@ -35,6 +36,9 @@ public class Cliente implements Persistente{
 	@Column(dbName= "estado", setJavaName = "setEstado", getJavaName = "getEstado")
 	private String estado;
 	
+	@Column(dbName= "createdAt", setJavaName = "setCreatedAt", getJavaName = "getCreatedAt")
+	private Date createdAt;
+
 	public Cliente() {} 
 
 	public Cliente(String name, Long cel, Long cpf, String end, Integer numero, String cidade, String estado) {
@@ -45,6 +49,7 @@ public class Cliente implements Persistente{
 		this.numero = numero;
 		this.cidade = cidade;
 		this.estado = estado;
+		this.createdAt = new Date();
 	}
 	
 	public Cliente(Long id, String name, Long cel, Long cpf, String end, Integer numero, String cidade, String estado) {
@@ -56,6 +61,7 @@ public class Cliente implements Persistente{
 		this.numero = numero;
 		this.cidade = cidade;
 		this.estado = estado;
+		this.createdAt = new Date();
 	}
 	
 	public Long getId() {
@@ -121,6 +127,14 @@ public class Cliente implements Persistente{
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+	
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 
 	@Override
 	public int hashCode() {
@@ -141,7 +155,7 @@ public class Cliente implements Persistente{
 
 	@Override
 	public String toString() {
-		return "Cliente [name=" + name + ", cel=" + cel + ", cpf=" + cpf + ", end=" + end + ", numero=" + numero
-				+ ", cidade=" + cidade + ", estado=" + estado + "]";
+		return "Cliente [cpf=" + cpf + ", name=" + name + ", cel=" + cel + ", end=" + end + ", numero="
+				+ numero + ", cidade=" + cidade + ", estado=" + estado + "]";
 	}
 }

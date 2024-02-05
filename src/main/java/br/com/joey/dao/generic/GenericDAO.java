@@ -5,13 +5,17 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import org.postgresql.util.PGTimestamp;
 
 import Exceptions.DbException;
 import Exceptions.GetValuesException;
@@ -252,11 +256,17 @@ public abstract class GenericDAO<T extends Persistente, E extends Serializable> 
 					Method method = this.clazz.getDeclaredMethod(methodName);
 					E value = (E) method.invoke(entity);
 					if (value.getClass() == String.class) value = (E) ("'" + value + "'");
-					if (i != fields.length - 1) {
+					
+					if (value.getClass() == java.util.Date.class && i == fields.length - 1) {
+						sb.append("'" + new Timestamp(((java.util.Date) value).getTime()) + "'");
+					} else if (value.getClass() == java.util.Date.class && i != fields.length - 1) {
+						sb.append("'" + new Timestamp(((java.util.Date) value).getTime()) + "'" + ", ");
+					} else if (i != fields.length - 1) {
 						sb.append(value + ", ");
 					} else {
 						sb.append(value);
 					}
+					
 				} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
 						| InvocationTargetException e) {
 					e.printStackTrace();
@@ -313,6 +323,11 @@ public abstract class GenericDAO<T extends Persistente, E extends Serializable> 
 			Short value = rs.getShort(fieldDBName);
     		setMethod.invoke(entity, value);
 		} 
+    	else if (fieldTypeClass.equals(java.util.Date.class)) {
+    		Timestamp value = rs.getTimestamp(fieldDBName);
+    		 Date date = new Date(value.getTime());
+    		setMethod.invoke(entity, date);
+		}  
 		else {
 			throw new UnkowFieldTypeException("TIPO DE CLASSE NÃO CONHECIDO: " + fieldTypeClass);
 		}
@@ -347,9 +362,12 @@ public abstract class GenericDAO<T extends Persistente, E extends Serializable> 
 				try {
 					Method methodGetValue = clazz.getDeclaredMethod(fieldGetValuemethod);
 					E value = (E) methodGetValue.invoke(entity);
-					if (value.getClass() == String.class)
-						value = (E) ("'" + value + "'");
-					sb.append(fieldDbName + " = " + value);
+					if (value.getClass() == String.class) value = (E) ("'" + value + "'");
+					if (value.getClass() == java.sql.Date.class) {
+						sb.append(fieldDbName + " = " + "'" + new Timestamp(((java.util.Date) value).getTime()) + "'");
+					} else {
+						sb.append(fieldDbName + " = " + value);
+					}
 					sb.append(", ");
 				} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
 						| InvocationTargetException e) {

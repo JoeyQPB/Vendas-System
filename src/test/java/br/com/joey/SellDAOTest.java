@@ -38,7 +38,7 @@ class SellDAOTest {
 	}
 
 	private Product cadastrarProduct(String code, Double price) throws UniqueValueNotFoundException {
-		Product Product = new Product(code, "Product 1", "descrição produto", price);
+		Product Product = new Product(code, "Product 1", "descrição produto", price, 10);
 		ProductDao.insert(Product);
 		return Product;
 	}

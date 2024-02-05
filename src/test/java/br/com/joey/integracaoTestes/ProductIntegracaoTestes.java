@@ -30,7 +30,7 @@ class ProductIntegracaoTestes {
 				assertTrue(deleteProduct(p.getCode()));
 			}
 		}
-		produto = new Product("AZN87", "Phone", "make calls", 1000.0);
+		produto = new Product("AZN87", "Phone", "make calls", 1000.0, 10);
 	}
 	
 	@After
@@ -74,7 +74,7 @@ class ProductIntegracaoTestes {
 	@Test
 	void selectAllTest() {
 		assertTrue(insertProduct(produto));
-		Product produto2 = new Product("AZN88", "Ipda", "Get Apps", 1200.0);
+		Product produto2 = new Product("AZN88", "Ipda", "Get Apps", 1200.0, 11);
 		assertTrue(insertProduct(produto2));
 		
 		Collection<Product> list = selectAllProduct();

@@ -25,7 +25,7 @@ class ProductServiceTeste {
 	
 	@BeforeEach
 	void inti() {
-		product = new Product("A1", "Nome do produto", "descrição", 10.0);
+		product = new Product("A1", "Nome do produto", "descrição", 10.0, 10);
 	}
 	
 	@Test

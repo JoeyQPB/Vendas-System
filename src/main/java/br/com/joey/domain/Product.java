@@ -14,7 +14,7 @@ public class Product implements Persistente {
 	private Long id;
 	
 	@UniqueValue("getCode")
-	@Column(dbName= "code", setJavaName = "setCode", getJavaName = "getCode")
+	@Column(dbName= "codigo", setJavaName = "setCode", getJavaName = "getCode")
 	private String code;
 	
 	@Column(dbName= "nome", setJavaName = "setName", getJavaName = "getName")
@@ -23,22 +23,32 @@ public class Product implements Persistente {
 	@Column(dbName= "descricao", setJavaName = "setDescricao", getJavaName = "getDescricao")
 	private String descricao;
 	
-	@Column(dbName= "preco", setJavaName = "setPrice", getJavaName = "getPrice")
+	@Column(dbName= "valor", setJavaName = "setPrice", getJavaName = "getPrice")
 	private Double price;
 	
-	public Product(String code, String name, String descricao, Double price) {
+	@Column(dbName= "quantidade", setJavaName = "setQuantity", getJavaName = "getQuantity")
+	private Integer quantity;
+	
+	@Column(dbName= "valor_estoque", setJavaName = "setAmountStock", getJavaName = "getAmountStock")
+	private Double amountStock;
+	
+	public Product(String code, String name, String descricao, Double price, Integer quantity) {
 		this.code = code;
 		this.name = name;
 		this.descricao = descricao;
 		this.price = price;
+		this.quantity = quantity;
+		this.amountStock = price*quantity;
 	}	 
 	
-	public Product(Long id, String code, String name, String descricao, Double price) {
+	public Product(Long id, String code, String name, String descricao, Double price, Integer quantity) {
 		this.id = id;
 		this.code = code;
 		this.name = name;
 		this.descricao = descricao;
 		this.price = price;
+		this.quantity = quantity;
+		this.amountStock = price*quantity;
 	}
 
 	public Product() {
@@ -83,7 +93,23 @@ public class Product implements Persistente {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-
+	
+	public Integer getQuantity() {
+		return quantity;
+	}
+	
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+	
+	public Double getAmountStock() {
+		return amountStock;
+	}
+	
+	public void setAmountStock(Double amountStock) {
+		this.amountStock = amountStock;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(code);
@@ -103,6 +129,8 @@ public class Product implements Persistente {
 
 	@Override
 	public String toString() {
-		return "Product [code=" + code + ", name=" + name + ", descricao=" + descricao + ", price=" + price + "]";
+		return "Product [code=" + code + ", name=" + name + ", descricao=" + descricao + ", price="
+				+ price + ", quantity=" + quantity + ", amountStock=" + amountStock + "]";
 	}
+
 }
